@@ -9,4 +9,4 @@ RUN dnf update -y && \
 
 VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
 
-ENTRYPOINT ["bash", "build.sh"]
+ENTRYPOINT ["su", "rpm", "-lc", "--", "bash", "build.sh"]
