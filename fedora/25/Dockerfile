@@ -5,9 +5,8 @@ RUN dnf update -y && \
     dnf install -y @development-tools fedora-packager rpmdevtools dnf-plugins-core wget && \
     useradd rpm && \
     su rpm -lc rpmdev-setuptree && \
-    wget https://raw.githubusercontent.com/Robpol86/dockerRPMbuild/master/build.sh && \
-    chmod +x build.sh
+    wget https://raw.githubusercontent.com/Robpol86/dockerRPMbuild/master/build.sh
 
 VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
 
-ENTRYPOINT ["build.sh"]
+ENTRYPOINT ["bash", "build.sh"]
