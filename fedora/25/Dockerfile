@@ -8,6 +8,6 @@ RUN dnf update -y && \
     wget https://raw.githubusercontent.com/Robpol86/dockerRPMbuild/master/build.sh && \
     chmod +x build.sh
 
-VOLUME ["/home/rpm/rpmbuild/RPMS", "/home/rpm/rpmbuild/SRPMS", "/home/rpm/rpmbuild/SOURCES", "/home/rpm/rpmbuild/SPECS"]
+VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
 
 ENTRYPOINT ["build.sh"]
