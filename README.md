@@ -3,13 +3,13 @@
 Minimal Docker Images for building RPM files for different RedHat-based Linux distributions.
 
 Available images:
-* [fedoraRawhide](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/rawhide/Dockerfile)
-* [fedora25](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/25/Dockerfile)
-* [fedora24](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/24/Dockerfile)
-* [fedora23](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/23/Dockerfile)
-* [fedora22](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/22/Dockerfile)
-* [centos7](https://github.com/Robpol86/dockerRPMbuild/blob/master/centos/7/Dockerfile)
-* [centos6](https://github.com/Robpol86/dockerRPMbuild/blob/master/centos/6/Dockerfile)
+* [fedoraRawhide](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedoraRawhide.Dockerfile)
+* [fedora25](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora25.Dockerfile)
+* [fedora24](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora24.Dockerfile)
+* [fedora23](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora23.Dockerfile)
+* [fedora22](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora22.Dockerfile)
+* [centos7](https://github.com/Robpol86/dockerRPMbuild/blob/master/centos7.Dockerfile)
+* [centos6](https://github.com/Robpol86/dockerRPMbuild/blob/master/centos6.Dockerfile)
 
 ## Usage
 
