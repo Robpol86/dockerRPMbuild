@@ -3,7 +3,11 @@
 Minimal Docker Images for building RPM files for different RedHat-based Linux distributions.
 
 Available images:
+* [fedoraRawhide](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/rawhide/Dockerfile)
 * [fedora25](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/25/Dockerfile)
+* [fedora24](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/24/Dockerfile)
+* [fedora23](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/23/Dockerfile)
+* [fedora22](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedora/22/Dockerfile)
 
 ## Usage
 
