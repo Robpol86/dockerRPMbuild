@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e  # Exit script if a command fails.
+set -o pipefail  # Exit script if any piped program fails instead of just the last program.
+set -u  # Treat unset variables as errors and exit immediately.
+set -x  # Print commands run by script to standard out.
+
+printenv
+cp ${DOCKER_TAG}.Dockerfile Dockerfile
