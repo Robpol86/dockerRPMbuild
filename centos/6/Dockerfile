@@ -1,8 +1,9 @@
-FROM fedora:23
+FROM centos:6
 MAINTAINER Robpol86 <robpol86@gmail.com>
 
-RUN dnf update -y && \
-    dnf install -y @development-tools fedora-packager rpmdevtools dnf-plugins-core wget
+RUN yum update -y && \
+    yum groupinstall -y "Development Tools" && \
+    yum install -y centos-packager rpmdevtools wget
 
 VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
 
