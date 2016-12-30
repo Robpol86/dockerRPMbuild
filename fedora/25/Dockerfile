@@ -8,7 +8,7 @@ VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
 
 RUN useradd rpm && \
     su rpm -lc rpmdev-setuptree && \
-    su rpm -lc "for d in RPMS SRPMS SOURCES SPECS; do rmdir rpmbuild/$d; ln -s /$d $_; done" && \
+    su rpm -lc 'for d in RPMS SRPMS SOURCES SPECS; do rmdir rpmbuild/$d; ln -s /$d $_; done' && \
     wget https://raw.githubusercontent.com/Robpol86/dockerRPMbuild/master/build.sh
 
 ENTRYPOINT ["bash", "build.sh"]
