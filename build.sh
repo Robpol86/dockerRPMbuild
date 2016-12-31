@@ -26,7 +26,11 @@ done
 
 # Install build dependencies and download source files for every spec file.
 for f in /home/${BUILD_USER}/rpmbuild/SPECS/*.spec; do
-    dnf builddep -y --spec "$f"
+    if type dnf &> /dev/null; then
+        dnf builddep -y --spec "$f"
+    else
+        yum-builddep -y "$f"
+    fi
     su ${BUILD_USER} -lc "spectool -g '$f' -C rpmbuild/SOURCES"
 done
 

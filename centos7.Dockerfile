@@ -6,6 +6,7 @@ RUN yum update -y && \
     yum install -y centos-packager rpmdevtools
 
 VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
+ADD build.sh build.sh
 
 RUN useradd rpm && \
     su rpm -lc rpmdev-setuptree && \

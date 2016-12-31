@@ -5,6 +5,7 @@ RUN dnf update -y && \
     dnf install -y @development-tools fedora-packager rpmdevtools dnf-plugins-core
 
 VOLUME ["/RPMS", "/SRPMS", "/SOURCES", "/SPECS"]
+ADD build.sh build.sh
 
 RUN useradd rpm && \
     su rpm -lc rpmdev-setuptree && \
