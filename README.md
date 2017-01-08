@@ -1,6 +1,6 @@
 # Docker RPM Build Images
 
-Minimal Docker Images for building RPM files for different RedHat-based Linux distributions.
+Minimal Docker Images for building RPMs from `.spec` or `.src.rpm` files for different RedHat-based Linux distributions.
 
 Available images:
 * [fedoraRawhide](https://github.com/Robpol86/dockerRPMbuild/blob/master/fedoraRawhide.Dockerfile)

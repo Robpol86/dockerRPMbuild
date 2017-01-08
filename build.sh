@@ -10,22 +10,18 @@ error () {
     exit 1
 }
 
-BUILD_UID="$UID"
 BUILD_USER="${BUILD_USER:-rpm}"
 
 # Create non-root user to build RPMs with with same UID set by docker for writable volume directories.
-for d in /RPMS /SRPMS /SOURCES; do
-    BUILD_UID=$(stat -c '%u' "$d")
-    [ "$BUILD_UID" != "0" ] && break
+uid="0"
+for d in /RPMS /SRPMS /SOURCES /SPECS; do
+    uid=$(stat -c '%u' "$d")
+    [ "$uid" != "0" ] && break
 done
-if [ "$BUILD_UID" != "0" ]; then
-    useradd "$BUILD_USER" -u "$BUILD_UID"
-else
-    useradd "$BUILD_USER"
-fi
+[ "$uid" != "0" ] && useradd "$BUILD_USER" -u "$uid" || useradd "$BUILD_USER"
 
 # Setup directories and permissions.
-chown rpm /RPMS /SRPMS /SOURCES
+chown rpm /RPMS /SRPMS /SOURCES /SPECS
 su rpm -lc rpmdev-setuptree
 su rpm -lc 'for d in RPMS SRPMS SOURCES SPECS; do rmdir rpmbuild/$d; ln -s /$d $_; done'
 
@@ -41,10 +37,7 @@ for f in /home/${BUILD_USER}/rpmbuild/SRPMS/*.src.rpm; do
 done
 
 # Check if we have at least one spec file.
-for f in /home/${BUILD_USER}/rpmbuild/SPECS/*.spec; do
-    [ -e "$f" ] || error "No spec files found in /home/$BUILD_USER/rpmbuild/SPECS"
-    break
-done
+compgen -G "/home/${BUILD_USER}/rpmbuild/SPECS/*.spec" || error "No spec files in /home/$BUILD_USER/rpmbuild/SPECS"
 
 # Install build dependencies and download source files for every spec file.
 for f in /home/${BUILD_USER}/rpmbuild/SPECS/*.spec; do
