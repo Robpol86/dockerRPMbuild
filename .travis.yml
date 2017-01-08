@@ -11,5 +11,19 @@ services: [docker]
 sudo: required
 
 # Run.
-install: hooks/post_checkout
-script: docker build . -t local
+before_install: hooks/post_checkout
+install: docker build . -t local
+script:
+  - mkdir out
+
+  - docker run -v $PWD/tests:/SPECS local  # Test unmounted output volumes.
+  - docker run -v $PWD/tests:/SPECS -v $PWD/out:/SRPMS -v $PWD/out:/RPMS local
+  - ls -la out/*
+  - compgen -G "out/smtpping-1.1.3-1.*.src.rpm"
+  - compgen -G "out/x86_64/smtpping-1.1.3-1.*.x86_64.rpm"
+
+  - rm -r out/x86_64; docker run -v $PWD/out:/SRPMS local
+  - docker run -v $PWD/out:/SRPMS -v $PWD/out:/RPMS local
+  - ls -la out/*
+  - compgen -G "out/smtpping-1.1.3-1.*.src.rpm"
+  - compgen -G "out/x86_64/smtpping-1.1.3-1.*.x86_64.rpm"
