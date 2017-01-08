@@ -1,0 +1,15 @@
+# Configure.
+env:
+  - DOCKER_TAG=centos6
+  - DOCKER_TAG=centos7
+  - DOCKER_TAG=fedora22
+  - DOCKER_TAG=fedora23
+  - DOCKER_TAG=fedora24
+  - DOCKER_TAG=fedora25
+  - DOCKER_TAG=fedoraRawhide
+services: [docker]
+sudo: required
+
+# Run.
+install: hooks/post_checkout
+script: docker build . -t local

@@ -10,12 +10,34 @@ error () {
     exit 1
 }
 
+BUILD_UID="$UID"
 BUILD_USER="${BUILD_USER:-rpm}"
+
+# Create non-root user to build RPMs with with same UID set by docker for writable volume directories.
+for d in /RPMS /SRPMS /SOURCES; do
+    BUILD_UID=$(stat -c '%u' "$d")
+    [ "$BUILD_UID" != "0" ] && break
+done
+if [ "$BUILD_UID" != "0" ]; then
+    useradd "$BUILD_USER" -u "$BUILD_UID"
+else
+    useradd "$BUILD_USER"
+fi
+
+# Setup directories and permissions.
+chown rpm /RPMS /SRPMS /SOURCES
+su rpm -lc rpmdev-setuptree
+su rpm -lc 'for d in RPMS SRPMS SOURCES SPECS; do rmdir rpmbuild/$d; ln -s /$d $_; done'
 
 # Print directory contents.
 ls -la /home/${BUILD_USER}/rpmbuild
 for d in /home/${BUILD_USER}/rpmbuild/*; do
     ls -la "$d/"
+done
+
+# Install source RPMs if any.
+for f in /home/${BUILD_USER}/rpmbuild/SRPMS/*.src.rpm; do
+    [ -e "$f" ] && su rpm -lc "rpm -i $f"
 done
 
 # Check if we have at least one spec file.
